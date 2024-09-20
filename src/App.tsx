@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="flex flex-row h-screen overflow-hidden bg-gray-100">
       <SidebarComponent />
-      <div className="w-full">
+      <div className="w-full h-screen">
         <OperationsComponent />
         <DragAndDropComponent />
       </div>

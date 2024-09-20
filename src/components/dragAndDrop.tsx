@@ -74,7 +74,7 @@ const DragAndDropComponent = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <section className="flex flex-row bg-grey-100 m-[10px] overflow-hidden">
+      <section className="flex flex-row bg-grey-100 h-[90%] m-[10px]">
         {data.columnOrder?.map((columnId: string) => {
           const column: any = data.columns[columnId];
           const tasks: any = column.taskIds.map(
