@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useStore } from "../../store/store";
-// import { items } from "../../mock/menu.mock";
-import { taskData } from "../../mock/tasks.mock";
+import { items } from "../../mock/menu.mock";
+// import { taskData } from "../../mock/tasks.mock";
 
 export const useSidebarHooks = () => {
   const [modal, setModal] = useState(false);
   const store: any = useStore();
 
   useEffect(() => {
-    store.setMenuItems(taskData);
+    store.setMenuItems(items);
   }, []);
 
   const addNewTaskManager = () => {
