@@ -1,6 +1,6 @@
 export const initialData: any = {
-  key: "p-1",
-  label: "Project 1",
+  // key: "p-1",
+  // label: "Project 1",
   tasks: {
     "task-1": { id: "task-1", content: "Take out the garbage" },
     "task-2": { id: "task-2", content: "Watch my favorite show" },

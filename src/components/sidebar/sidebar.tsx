@@ -13,7 +13,8 @@ const InputComp = lazy(() => import("../antd components/inputAntd"));
 
 const SidebarComponent: React.FC = () => {
   const store: any = useStore();
-  const { modal, setModal, addNewTaskManager } = useSidebarHooks();
+  const { modal, setModal, addNewTaskManager, selectedProject } =
+    useSidebarHooks();
 
   return (
     <section className="border-rounded min-w-[250px] m-[10px] bg-white rounded-md">
@@ -23,7 +24,7 @@ const SidebarComponent: React.FC = () => {
       <MenuAntd
         items={store.menuItems}
         onClick={(e: any) => {
-          console.log(e);
+          selectedProject(e.key);
         }}
       />
       <Suspense>

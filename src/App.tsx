@@ -1,4 +1,4 @@
-import DragAndDropComponent from "./components/dragAndDrop";
+import DragAndDropComponent from "./components/dragAndDrop/dragAndDrop";
 import SidebarComponent from "./components/sidebar/sidebar";
 import OperationsComponent from "./components/operations/operations";
 // import "./App.css";

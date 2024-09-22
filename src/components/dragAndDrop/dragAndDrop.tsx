@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { initialData } from "../mock/tasks.mock";
+import { Suspense } from "react";
+// import { initialData } from "../../mock/tasks.mock";
 import { DragDropContext } from "react-beautiful-dnd";
-import ColumnComponent from "./column";
+import ColumnComponent from "../column";
+import { useStore } from "../../store/store";
+import SkeletonAntd from "../antd components/skeletonAntd";
+import { useDragAndDropHooks } from "./dragAndDrop.hooks";
 
 const DragAndDropComponent = () => {
-  const [data, setData] = useState(initialData);
+  const store: any = useStore();
+  const { data, setData } = useDragAndDropHooks();
 
   const onDragEnd = (result: any) => {
     // TODO: reorder our column
@@ -21,8 +25,8 @@ const DragAndDropComponent = () => {
       return;
     }
 
-    const start = data.columns[source.droppableId];
-    const finish = data.columns[destination.droppableId];
+    const start = data?.columns[source.droppableId];
+    const finish = data?.columns[destination.droppableId];
 
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
@@ -34,10 +38,10 @@ const DragAndDropComponent = () => {
         taskIds: newTaskIds,
       };
 
-      const newState = {
+      const newState: any = {
         ...data,
         columns: {
-          ...data.columns,
+          ...data?.columns,
           [newColumn.id]: newColumn,
         },
       };
@@ -61,10 +65,10 @@ const DragAndDropComponent = () => {
       taskIds: finishTaskIds,
     };
 
-    const newState = {
+    const newState: any = {
       ...data,
       columns: {
-        ...data.columns,
+        ...data?.columns,
         [newStart.id]: newStart,
         [newFinish.id]: newFinish,
       },
@@ -73,19 +77,25 @@ const DragAndDropComponent = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <section className="flex flex-row bg-grey-100 h-[90%] m-[10px]">
-        {data.columnOrder?.map((columnId: string) => {
-          const column: any = data.columns[columnId];
-          const tasks: any = column.taskIds.map(
-            (taskId: string) => data.tasks[taskId]
-          );
-          return (
-            <ColumnComponent key={columnId} column={column} tasks={tasks} />
-          );
-        })}
-      </section>
-    </DragDropContext>
+    <Suspense fallback={<SkeletonAntd />}>
+      {store.selectedProjectItems ? (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <section className="flex flex-row bg-grey-100 h-[90%] m-[10px]">
+            {data?.columnOrder?.map((columnId: string) => {
+              const column: any = data.columns[columnId];
+              const tasks: any = column.taskIds.map(
+                (taskId: string) => data.tasks[taskId]
+              );
+              return (
+                <ColumnComponent key={columnId} column={column} tasks={tasks} />
+              );
+            })}
+          </section>
+        </DragDropContext>
+      ) : (
+        <SkeletonAntd />
+      )}
+    </Suspense>
   );
 };
 
