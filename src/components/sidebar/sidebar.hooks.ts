@@ -30,10 +30,10 @@ export const useSidebarHooks = () => {
   }, [modal]);
 
   const addProject = async () => {
-    let currentItems = store.menuItems;
+    let currentItems = store.menuItems || 0;
     let label = store.projectTitle;
     let key = `${label}-${currentItems.length + 1}`;
-    let data = { key, label, id: "" };
+    let data = { key, label };
     // let newMenu = [...currentItems, { ...newItem }];
     // store.setMenuItems(newMenu);
     store.setProjectTitle("");

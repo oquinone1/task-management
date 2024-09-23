@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PostAPICall, GetAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 import { useStore } from "../../store/store";
 
 export const useOperationsHook = () => {
   const store: any = useStore();
-  const [modal, setModal] = useState(false);
+  const [newTaskModal, setNewTaskModal] = useState(false);
+  const [columnsModal, setColumnsModal] = useState(false);
   const [task, setTask] = useState("");
+  const [column, setColum] = useState("");
 
   const submitTask = async () => {
     const selectedProject = store.selectedProject;
     const id = store.projectId;
     const allTasks = selectedProject.tasks;
-    const taskCount = Object.keys(allTasks).length;
+    const taskCount = allTasks !== null ? Object.keys(allTasks).length : 0;
     let taskName = `${task}-${taskCount + 1}`;
     let newTask: any = {
       id,
@@ -49,8 +51,72 @@ export const useOperationsHook = () => {
     };
     console.log(structredData);
     store.setSelectedProject(structredData);
-    setModal(false);
+    setNewTaskModal(false);
   };
 
-  return { modal, setModal, task, setTask, submitTask };
+  const submitColumn = async () => {
+    const selectedProject = store.selectedProject;
+    const id = store.projectId;
+    const columnLen =
+      selectedProject?.columns === null
+        ? 0
+        : Object.keys(selectedProject.columns).length;
+    const columnName = `${column}-${columnLen + 1}`;
+
+    const columns = {
+      [columnName]: {
+        id: columnName,
+        title: column,
+        taskIds: [],
+      },
+    };
+
+    const columnOrder =
+      selectedProject.columnOrder !== null
+        ? [...selectedProject.columnOrder, columnName]
+        : [columnName];
+
+    const columnData = {
+      id,
+      columns,
+      columnOrder,
+    };
+
+    await PostAPICall({ url: urls.addColumn, data: columnData });
+    const url: string = `${urls.getProjectData}?id=${id}`;
+    const projectData: any = await GetAPICall({ url });
+    const structredData = {
+      id: projectData.id,
+      columns: projectData.columns.columns,
+      columnOrder: projectData.columns.columnOrder,
+      tasks: projectData.tasks.tasks,
+    };
+    store.setSelectedProject(structredData);
+    setColumnsModal(false);
+  };
+
+  const openColumnsModal = () => {
+    setColum("");
+    setColumnsModal(true);
+  };
+
+  const openTasksModal = () => {
+    setTask("");
+    setNewTaskModal(true);
+  };
+
+  return {
+    newTaskModal,
+    setNewTaskModal,
+    columnsModal,
+    setColumnsModal,
+    task,
+    setTask,
+    openTasksModal,
+    submitTask,
+    column,
+    setColum,
+    submitColumn,
+    openColumnsModal,
+  };
 };
