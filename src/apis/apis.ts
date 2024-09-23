@@ -20,10 +20,11 @@ export const GetAPICall = async (props: any) => {
 };
 
 export const PostAPICall = async (props: any) => {
-  const { url, options } = props || {};
+  const { url, options, data } = props || {};
 
   let moreOptions = {
     method: "POST",
+    body: JSON.stringify(data),
     ...options,
   };
 

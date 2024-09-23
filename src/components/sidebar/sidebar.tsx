@@ -13,8 +13,7 @@ const InputComp = lazy(() => import("../antd components/inputAntd"));
 
 const SidebarComponent: React.FC = () => {
   const store: any = useStore();
-  const { modal, setModal, addNewTaskManager, getProjectData } =
-    useSidebarHooks();
+  const { modal, setModal, addProject, getProjectData } = useSidebarHooks();
 
   return (
     <section className="border-rounded min-w-[250px] m-[10px] bg-white rounded-md">
@@ -33,7 +32,7 @@ const SidebarComponent: React.FC = () => {
           title="Add new task manager"
           okText="Add"
           onCancel={() => setModal(false)}
-          onOk={() => addNewTaskManager()}
+          onOk={() => addProject()}
         >
           <InputComp
             value={store.projectTitle}
