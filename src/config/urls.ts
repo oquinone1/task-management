@@ -1,3 +1,4 @@
 export const urls: any = {
-  getAllProjects: "http://localhost:8080/projects",
+  getProjectTitles: "http://localhost:8080/projects",
+  getProjectData: "http://localhost:8080/getProjectData",
 };

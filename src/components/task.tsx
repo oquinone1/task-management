@@ -11,7 +11,7 @@ const TaskComponent = (props: any) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {task.taskContent}
+          {task.content}
         </div>
       )}
     </Draggable>

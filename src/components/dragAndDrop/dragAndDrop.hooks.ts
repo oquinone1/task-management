@@ -12,8 +12,8 @@ export const useDragAndDropHooks = () => {
   const [data, setData] = useState<DragAndDrop>();
 
   useEffect(() => {
-    setData(store.selectedProjectItems);
-  }, [store.selectedProjectItems]);
+    setData(store.selectedProject);
+  }, [store.selectedProject]);
 
   return { data, setData };
 };

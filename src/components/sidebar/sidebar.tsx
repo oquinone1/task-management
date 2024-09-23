@@ -13,7 +13,7 @@ const InputComp = lazy(() => import("../antd components/inputAntd"));
 
 const SidebarComponent: React.FC = () => {
   const store: any = useStore();
-  const { modal, setModal, addNewTaskManager, selectedProject } =
+  const { modal, setModal, addNewTaskManager, getProjectData } =
     useSidebarHooks();
 
   return (
@@ -24,7 +24,7 @@ const SidebarComponent: React.FC = () => {
       <MenuAntd
         items={store.menuItems}
         onClick={(e: any) => {
-          selectedProject(e.key);
+          getProjectData(e.key);
         }}
       />
       <Suspense>
@@ -36,8 +36,8 @@ const SidebarComponent: React.FC = () => {
           onOk={() => addNewTaskManager()}
         >
           <InputComp
-            value={store.taskManagerTitle}
-            onChange={(e: any) => store.setTaskManagerTitle(e.target.value)}
+            value={store.projectTitle}
+            onChange={(e: any) => store.setProjectTitle(e.target.value)}
             placeholder="Ex. React Frontend Project"
             allowClear
           />

@@ -78,7 +78,7 @@ const DragAndDropComponent = () => {
 
   return (
     <Suspense fallback={<SkeletonAntd />}>
-      {store.selectedProjectItems ? (
+      {Object.keys(store.selectedProject).length > 0 ? (
         <DragDropContext onDragEnd={onDragEnd}>
           <section className="flex flex-row bg-grey-100 h-[90%] m-[10px]">
             {data?.columnOrder?.map((columnId: string) => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useStore } from "../../store/store";
-import { getProjects } from "../../apis/apis";
+import { GetAPICall } from "../../apis/apis";
+import { urls } from "../../config/urls";
 // import { items } from "../../mock/menu.mock";
 // import { taskData } from "../../mock/tasks.mock";
 
@@ -10,14 +11,8 @@ export const useSidebarHooks = () => {
 
   useEffect(() => {
     const getAllData = async () => {
-      const data: any = await getProjects();
-
-      const menuItems = data.map((items: any) => {
-        return { key: items.key, label: items.label };
-      });
-
-      store.setMenuItems(menuItems);
-      store.setAllProjectData(data);
+      const data: any = await GetAPICall({ url: urls.getProjectTitles });
+      store.setMenuItems(data);
     };
 
     getAllData();
@@ -25,24 +20,41 @@ export const useSidebarHooks = () => {
 
   const addNewTaskManager = () => {
     let currentItems = store.menuItems;
-    let newItem = {
-      key: `${store.taskManagerTitle}_${currentItems.length + 1}`,
-      label: store.taskManagerTitle,
-    };
-    let newMenu = [...currentItems, newItem];
+    let label = store.projectTitle;
+    let key = `${label}-${currentItems.length + 1}`;
+    let newItem = { key, label, id: "" };
+    let newMenu = [...currentItems, { ...newItem }];
+    console.log(newMenu);
     store.setMenuItems(newMenu);
-    store.setTaskManagerTitle("");
+    store.setProjectTitle("");
+    // store.setSelectedProject({});
+    // store.setProjectId("");
     setModal(false);
   };
 
-  const selectedProject = (key: string) => {
-    const keySplit = key.split("-");
-    const value = Number(keySplit[1]) - 1;
+  const getProjectData = async (key: string) => {
+    const menuItems = store.menuItems;
 
-    const data: any = store.allProjectData[value];
-    console.log(data);
-    store.setSelectedProjectItems(data);
+    const currentObject: any = menuItems.find((item: any) => {
+      return item.key === key;
+    });
+    if (!currentObject.id) {
+      store.setProjectId("");
+      store.setSelectedProject({});
+      return;
+    }
+
+    store.setProjectId(currentObject.id);
+    const url: string = `${urls.getProjectData}?id=${currentObject.id}`;
+    const data: any = await GetAPICall({ url });
+    const structredData = {
+      id: data.id,
+      columns: data.columns.columns,
+      columnOrder: data.columns.columnOrder,
+      tasks: data.tasks.tasks,
+    };
+    store.setSelectedProject(structredData);
   };
 
-  return { modal, setModal, addNewTaskManager, selectedProject };
+  return { modal, setModal, addNewTaskManager, getProjectData };
 };
