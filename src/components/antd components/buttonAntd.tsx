@@ -6,6 +6,7 @@ const ButtonAntd = (props: any) => {
     onClick = null,
     children = null,
     type = "primary",
+    testId = "",
   } = props || {};
 
   const inputProps: any = {
@@ -14,6 +15,7 @@ const ButtonAntd = (props: any) => {
     children: children,
     type: type,
   };
+  if (testId) inputProps["data-testid"] = testId;
 
   return <Button {...inputProps} />;
 };

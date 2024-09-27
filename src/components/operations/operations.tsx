@@ -32,7 +32,7 @@ const OperationsComponent = () => {
       <ButtonAntd onClick={() => openTasksModal()}>Add new task</ButtonAntd>
       <ModalAntd
         open={newTaskModal}
-        title="Add new task"
+        title="Add task"
         onOk={() => submitTask()}
         onCancel={() => setNewTaskModal(false)}
       >
