@@ -6,6 +6,7 @@ export const getProjects = async () => {
   return res;
 };
 
+// GET
 export const GetAPICall = async (props: any) => {
   const { url, options } = props || {};
 
@@ -19,12 +20,27 @@ export const GetAPICall = async (props: any) => {
   return res;
 };
 
+// POST
 export const PostAPICall = async (props: any) => {
   const { url, options, data } = props || {};
 
   let moreOptions = {
     method: "POST",
     body: JSON.stringify(data),
+    ...options,
+  };
+
+  const response = await fetch(url, { ...moreOptions });
+  const res = await response.json();
+  return res;
+};
+
+// DELETE
+export const DeleteAPICall = async (props: any) => {
+  const { url, options } = props || {};
+
+  let moreOptions = {
+    method: "DELETE",
     ...options,
   };
 

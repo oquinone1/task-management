@@ -11,4 +11,11 @@ export const useStore = create((set) => ({
   setSelectedProject: (project: any) =>
     set(() => ({ selectedProject: project })),
   setProjectTitle: (title: "") => set(() => ({ projectTitle: title })),
+  resetStore: () =>
+    set(() => ({
+      menuItems: [],
+      selectedProject: {},
+      projectId: "",
+      projectTitle: "",
+    })),
 }));

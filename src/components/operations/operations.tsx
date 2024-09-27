@@ -1,7 +1,9 @@
+import { lazy, Suspense } from "react";
 import ButtonAntd from "../antd components/buttonAntd";
-import ModalAntd from "../antd components/modalAntd";
 import InputAntd from "../antd components/inputAntd";
 import { useOperationsHook } from "./operations.hooks";
+
+const Modal = lazy(() => import("../antd components/modalAntd"));
 
 const OperationsComponent = () => {
   const {
@@ -17,6 +19,9 @@ const OperationsComponent = () => {
     submitColumn,
     openColumnsModal,
     openTasksModal,
+    removeProject,
+    setRemoveProject,
+    deleteProject,
   } = useOperationsHook();
 
   return (
@@ -29,33 +34,48 @@ const OperationsComponent = () => {
       >
         Add new column
       </ButtonAntd>
-      <ButtonAntd onClick={() => openTasksModal()}>Add new task</ButtonAntd>
-      <ModalAntd
-        open={newTaskModal}
-        title="Add task"
-        onOk={() => submitTask()}
-        onCancel={() => setNewTaskModal(false)}
-      >
-        <p>Task</p>
-        <InputAntd
-          placeholder="Ex. Add new styling"
-          value={task}
-          onChange={(e: any) => setTask(e.target.value)}
-        />
-      </ModalAntd>
-      <ModalAntd
-        open={columnsModal}
-        title="Add column"
-        onOk={() => submitColumn()}
-        onCancel={() => setColumnsModal(false)}
-      >
-        <p>Column name</p>
-        <InputAntd
-          placeholder="Ex. In Progress"
-          value={column}
-          onChange={(e: any) => setColum(e.target.value)}
-        />
-      </ModalAntd>
+      <ButtonAntd className="mr-[10px]" onClick={() => openTasksModal()}>
+        Add new task
+      </ButtonAntd>
+      <ButtonAntd className="mr-[10px]" onClick={() => setRemoveProject(true)}>
+        Delete Project
+      </ButtonAntd>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Modal
+          open={newTaskModal}
+          title="Add task"
+          onOk={() => submitTask()}
+          onCancel={() => setNewTaskModal(false)}
+        >
+          <p>Task</p>
+          <InputAntd
+            placeholder="Ex. Add new styling"
+            value={task}
+            onChange={(e: any) => setTask(e.target.value)}
+          />
+        </Modal>
+        <Modal
+          open={columnsModal}
+          title="Add column"
+          onOk={() => submitColumn()}
+          onCancel={() => setColumnsModal(false)}
+        >
+          <p>Column name</p>
+          <InputAntd
+            placeholder="Ex. In Progress"
+            value={column}
+            onChange={(e: any) => setColum(e.target.value)}
+          />
+        </Modal>
+        <Modal
+          open={removeProject}
+          onOk={() => deleteProject()}
+          onCancel={() => setRemoveProject(false)}
+          okText="Delete"
+        >
+          Would you like to delete this project?
+        </Modal>
+      </Suspense>
     </div>
   );
 };

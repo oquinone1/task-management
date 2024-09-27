@@ -12,13 +12,13 @@ const ModalAntd = (props: any) => {
   } = props || {};
 
   const inputProps = {
-    open: open,
-    children: children,
-    title: title,
-    okText: okText,
-    cancelText: cancelText,
-    onCancel: onCancel,
-    onOk: onOk,
+    open,
+    children,
+    title,
+    okText,
+    cancelText,
+    onCancel,
+    onOk,
   };
 
   return <Modal {...inputProps} />;

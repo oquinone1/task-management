@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PostAPICall, GetAPICall } from "../../apis/apis";
+import { PostAPICall, GetAPICall, DeleteAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 import { useStore } from "../../store/store";
 
@@ -9,6 +9,7 @@ export const useOperationsHook = () => {
   const [columnsModal, setColumnsModal] = useState(false);
   const [task, setTask] = useState("");
   const [column, setColum] = useState("");
+  const [removeProject, setRemoveProject] = useState(false);
 
   const submitTask = async () => {
     const selectedProject = store.selectedProject;
@@ -105,6 +106,17 @@ export const useOperationsHook = () => {
     setNewTaskModal(true);
   };
 
+  const deleteProject = async () => {
+    const currentId = store.projectId;
+    store.resetStore();
+    const url: string = `${urls.removeProject}?id=${currentId}`;
+    await DeleteAPICall({ url });
+
+    const data: any = await GetAPICall({ url: urls.getProjectTitles });
+    store.setMenuItems(data);
+    setRemoveProject(false);
+  };
+
   return {
     newTaskModal,
     setNewTaskModal,
@@ -118,5 +130,8 @@ export const useOperationsHook = () => {
     setColum,
     submitColumn,
     openColumnsModal,
+    removeProject,
+    setRemoveProject,
+    deleteProject,
   };
 };
