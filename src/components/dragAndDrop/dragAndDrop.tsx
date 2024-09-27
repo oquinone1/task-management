@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import ColumnComponent from "../column";
 import { useStore } from "../../store/store";
-import SkeletonAntd from "../antd components/skeletonAntd";
+import DragAndDropSkeletonComponent from "./dragAndDropSkeleton";
 import { useDragAndDropHooks } from "./dragAndDrop.hooks";
 
 const DragAndDropComponent = () => {
@@ -77,7 +77,7 @@ const DragAndDropComponent = () => {
   };
 
   return (
-    <Suspense fallback={<SkeletonAntd />}>
+    <Suspense fallback={<div>Loading...</div>}>
       {Object.keys(store.selectedProject).length > 0 ? (
         <DragDropContext onDragEnd={onDragEnd}>
           <section className="flex flex-row w-full h-[87%] m-[10px] ml-[5px] bg-white rounded-md overflow-x-auto">
@@ -93,7 +93,7 @@ const DragAndDropComponent = () => {
           </section>
         </DragDropContext>
       ) : (
-        <SkeletonAntd />
+        <DragAndDropSkeletonComponent />
       )}
     </Suspense>
   );
