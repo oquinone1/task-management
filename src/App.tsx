@@ -5,7 +5,7 @@ import OperationsComponent from "./components/operations/operations";
 
 function App() {
   return (
-    <div className="flex flex-row h-screen overflow-hidden bg-gray-100">
+    <div className="flex flex-row h-screen overflow-hidden bg-white">
       <SidebarComponent />
       <div className="w-full h-screen">
         <OperationsComponent />

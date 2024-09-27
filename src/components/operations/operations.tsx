@@ -20,12 +20,12 @@ const OperationsComponent = () => {
   } = useOperationsHook();
 
   return (
-    <div className="flex flex-row justify-between w-[98%] p-[1em] m-[10px] bg-white rounded-md">
-      <p>OperationsComponent</p>
+    <div className="w-full box-border m-[15px] ml-[5px] py-[15px]">
       <ButtonAntd
         onClick={() => {
           openColumnsModal();
         }}
+        className="mr-[10px]"
       >
         Add new column
       </ButtonAntd>

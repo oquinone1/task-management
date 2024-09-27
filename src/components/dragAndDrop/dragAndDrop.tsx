@@ -80,7 +80,7 @@ const DragAndDropComponent = () => {
     <Suspense fallback={<SkeletonAntd />}>
       {Object.keys(store.selectedProject).length > 0 ? (
         <DragDropContext onDragEnd={onDragEnd}>
-          <section className="flex flex-row bg-grey-100 h-[90%] m-[10px]">
+          <section className="flex flex-row w-full h-[87%] m-[10px] ml-[5px] bg-white rounded-md overflow-x-auto">
             {data?.columnOrder?.map((columnId: string) => {
               const column: any = data.columns[columnId];
               const tasks: any = column.taskIds.map(

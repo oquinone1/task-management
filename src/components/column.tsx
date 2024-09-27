@@ -4,12 +4,15 @@ import TaskComponent from "./task";
 const ColumnComponent = (props: any) => {
   const { column, tasks } = props || null;
   return (
-    <section className="px-[10px] pt-[10px] pb-[5px] rounded-sm bg-white w-[200px] flex flex-col mx-[5px]">
+    <section
+      // className="grid grid-cols-1 lg:grid-cols-4 gap-4 bg-gray-100 border-2 m-[10px] border-2 border-"
+      className=" px-[10px] pt-[10px] pb-[5px] rounded-sm bg-gray-100 flex flex-col mr-[15px] border-2"
+    >
       <h2 className="">{column.title}</h2>
       <Droppable droppableId={column.id}>
         {(provided) => (
           <div
-            className="flex-grow min-h-[400px]"
+            className="flex-grow min-w-[300px]"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

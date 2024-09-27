@@ -16,12 +16,13 @@ const SidebarComponent: React.FC = () => {
   const { modal, setModal, addProject, getProjectData } = useSidebarHooks();
 
   return (
-    <section className="border-rounded min-w-[250px] m-[10px] bg-white rounded-md">
+    <section className="border-rounded min-w-[250px] m-[15px] h-[96%] bg-gray-200 rounded-md">
       <div className="flex justify-end p-[10px]">
         <ButtonAntd icon={<PlusOutlined />} onClick={() => setModal(true)} />
       </div>
       <MenuAntd
         items={store.menuItems}
+        className="bg-gray-200"
         onClick={(e: any) => {
           getProjectData(e.key);
         }}
