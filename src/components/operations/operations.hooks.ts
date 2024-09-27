@@ -133,5 +133,6 @@ export const useOperationsHook = () => {
     removeProject,
     setRemoveProject,
     deleteProject,
+    store,
   };
 };

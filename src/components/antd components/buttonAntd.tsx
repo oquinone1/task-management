@@ -8,6 +8,7 @@ const ButtonAntd = (props: any) => {
     type = "primary",
     className = "",
     testId = "",
+    disabled = false,
   } = props || {};
 
   const inputProps: any = {
@@ -16,6 +17,7 @@ const ButtonAntd = (props: any) => {
     children,
     type,
     className,
+    disabled,
   };
   if (testId) inputProps["data-testid"] = testId;
 

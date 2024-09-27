@@ -1,9 +1,9 @@
 import { lazy, Suspense } from "react";
 import ButtonAntd from "../antd components/buttonAntd";
-import InputAntd from "../antd components/inputAntd";
 import { useOperationsHook } from "./operations.hooks";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
+const Input = lazy(() => import("../antd components/inputAntd"));
 
 const OperationsComponent = () => {
   const {
@@ -22,11 +22,13 @@ const OperationsComponent = () => {
     removeProject,
     setRemoveProject,
     deleteProject,
+    store,
   } = useOperationsHook();
 
   return (
     <div className="w-full box-border m-[15px] ml-[5px] py-[15px]">
       <ButtonAntd
+        disabled={!store?.projectId}
         onClick={() => {
           openColumnsModal();
         }}
@@ -34,10 +36,24 @@ const OperationsComponent = () => {
       >
         Add new column
       </ButtonAntd>
-      <ButtonAntd className="mr-[10px]" onClick={() => openTasksModal()}>
+      <ButtonAntd
+        disabled={
+          !store.projectId
+            ? !store.projectId
+            : store?.selectedProject?.columns !== null
+            ? false
+            : true
+        }
+        className="mr-[10px]"
+        onClick={() => openTasksModal()}
+      >
         Add new task
       </ButtonAntd>
-      <ButtonAntd className="mr-[10px]" onClick={() => setRemoveProject(true)}>
+      <ButtonAntd
+        disabled={!store.projectId}
+        className="mr-[10px]"
+        onClick={() => setRemoveProject(true)}
+      >
         Delete Project
       </ButtonAntd>
       <Suspense fallback={<div>Loading...</div>}>
@@ -48,7 +64,7 @@ const OperationsComponent = () => {
           onCancel={() => setNewTaskModal(false)}
         >
           <p>Task</p>
-          <InputAntd
+          <Input
             placeholder="Ex. Add new styling"
             value={task}
             onChange={(e: any) => setTask(e.target.value)}
@@ -61,7 +77,7 @@ const OperationsComponent = () => {
           onCancel={() => setColumnsModal(false)}
         >
           <p>Column name</p>
-          <InputAntd
+          <Input
             placeholder="Ex. In Progress"
             value={column}
             onChange={(e: any) => setColum(e.target.value)}
