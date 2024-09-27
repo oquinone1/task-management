@@ -5,4 +5,5 @@ export const urls: any = {
   addTask: "http://localhost:8080/addTask",
   addColumn: "http://localhost:8080/addColumn",
   removeProject: "http://localhost:8080/removeProject",
+  replaceColumns: "http://localhost:8080/replaceColumns",
 };

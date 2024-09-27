@@ -5,12 +5,14 @@ import ColumnComponent from "../column";
 import { useStore } from "../../store/store";
 import DragAndDropSkeletonComponent from "./dragAndDropSkeleton";
 import { useDragAndDropHooks } from "./dragAndDrop.hooks";
+import { PutAPICall } from "../../apis/apis";
+import { urls } from "../../config/urls";
 
 const DragAndDropComponent = () => {
   const store: any = useStore();
   const { data, setData } = useDragAndDropHooks();
 
-  const onDragEnd = (result: any) => {
+  const onDragEnd = async (result: any) => {
     // TODO: reorder our column
     const { destination, source, draggableId } = result;
 
@@ -74,13 +76,19 @@ const DragAndDropComponent = () => {
       },
     };
     setData(newState);
+    let col = {
+      columns: newState.columns,
+      columnOrder: newState.columnOrder,
+      id: newState.id,
+    };
+    await PutAPICall({ url: urls.replaceColumns, data: { ...col } });
   };
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       {Object.keys(store.selectedProject).length > 0 ? (
         <DragDropContext onDragEnd={onDragEnd}>
-          <section className="flex flex-row w-full h-[87%] m-[10px] ml-[5px] bg-white rounded-md overflow-x-auto">
+          <section className="flex flex-row w-[92%] h-[87%] bg-white overflow-x-auto">
             {data?.columnOrder?.map((columnId: string) => {
               const column: any = data.columns[columnId];
               const tasks: any = column.taskIds.map(

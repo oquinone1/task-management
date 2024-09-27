@@ -35,6 +35,21 @@ export const PostAPICall = async (props: any) => {
   return res;
 };
 
+// PUT
+export const PutAPICall = async (props: any) => {
+  const { url, data, options } = props || {};
+
+  let moreOptions = {
+    method: "PUT",
+    body: JSON.stringify(data),
+    ...options,
+  };
+
+  const response = await fetch(url, { ...moreOptions });
+  const res = await response.json();
+  return res;
+};
+
 // DELETE
 export const DeleteAPICall = async (props: any) => {
   const { url, options } = props || {};

@@ -1,15 +1,14 @@
 import SkeletonAntd from "../antd components/skeletonAntd";
 
 const DragAndDropSkeletonComponent = () => {
-  const columns = [...Array(4)].map((_: any) => {
+  const columns = [...Array(4)].map((_: any, index: number) => {
     return (
-      <div>
-        <SkeletonAntd
-          style={{ width: "300px" }}
-          paragraph={{ rows: 22 }}
-          active
-        />
-      </div>
+      <SkeletonAntd
+        key={`skeleton_${index}`}
+        style={{ minWidth: "250px" }}
+        paragraph={{ rows: 22 }}
+        active
+      />
     );
   });
   return (
