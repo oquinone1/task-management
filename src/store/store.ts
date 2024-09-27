@@ -13,7 +13,6 @@ export const useStore = create((set) => ({
   setProjectTitle: (title: "") => set(() => ({ projectTitle: title })),
   resetStore: () =>
     set(() => ({
-      menuItems: [],
       selectedProject: {},
       projectId: "",
       projectTitle: "",

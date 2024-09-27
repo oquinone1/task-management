@@ -20,13 +20,19 @@ const SidebarComponent: React.FC = () => {
       <div className="flex justify-end p-[10px]">
         <ButtonAntd icon={<PlusOutlined />} onClick={() => setModal(true)} />
       </div>
-      <MenuAntd
-        items={store.menuItems}
-        className="bg-gray-200"
-        onClick={(e: any) => {
-          getProjectData(e.key);
-        }}
-      />
+      {store.menuItems && store.menuItems.length > 0 ? (
+        <MenuAntd
+          items={store.menuItems}
+          className="bg-gray-200"
+          onClick={(e: any) => {
+            getProjectData(e.key);
+          }}
+        />
+      ) : (
+        <div className="h-[45%] text-center place-content-end">
+          Please add a project
+        </div>
+      )}
       <Suspense>
         <ModalComp
           open={modal}
