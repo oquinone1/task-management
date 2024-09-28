@@ -1,3 +1,4 @@
+import { DeleteOutlined, DiffOutlined, FormOutlined } from "@ant-design/icons";
 import { lazy, Suspense } from "react";
 import ButtonAntd from "../antd components/buttonAntd";
 import { useOperationsHook } from "./operations.hooks";
@@ -32,9 +33,10 @@ const OperationsComponent = () => {
         onClick={() => {
           openColumnsModal();
         }}
+        icon={<DiffOutlined />}
         className="mr-[10px]"
       >
-        Add new column
+        Add Column
       </ButtonAntd>
       <ButtonAntd
         disabled={
@@ -45,14 +47,17 @@ const OperationsComponent = () => {
             : true
         }
         className="mr-[10px]"
+        icon={<FormOutlined />}
         onClick={() => openTasksModal()}
       >
-        Add new task
+        Add Task
       </ButtonAntd>
       <ButtonAntd
         disabled={!store.projectId}
         className="mr-[10px]"
         onClick={() => setRemoveProject(true)}
+        icon={<DeleteOutlined />}
+        danger
       >
         Delete Project
       </ButtonAntd>
