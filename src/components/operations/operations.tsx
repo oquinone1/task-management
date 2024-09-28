@@ -61,13 +61,19 @@ const OperationsComponent = () => {
       >
         Delete Project
       </ButtonAntd>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense>
         <Modal
           open={newTaskModal}
-          title="Add task"
+          title="Add Task"
           onOk={() => submitTask()}
           onCancel={() => setNewTaskModal(false)}
         >
+          {/*
+           * Summary
+           * Description
+           * Priority
+           * Date
+           */}
           <p>Task</p>
           <Input
             placeholder="Ex. Add new styling"
@@ -77,7 +83,7 @@ const OperationsComponent = () => {
         </Modal>
         <Modal
           open={columnsModal}
-          title="Add column"
+          title="Add Column"
           onOk={() => submitColumn()}
           onCancel={() => setColumnsModal(false)}
         >
@@ -93,9 +99,8 @@ const OperationsComponent = () => {
           onOk={() => deleteProject()}
           onCancel={() => setRemoveProject(false)}
           okText="Delete"
-        >
-          Would you like to delete this project?
-        </Modal>
+          title="Would you like to delete this project?"
+        />
       </Suspense>
     </div>
   );

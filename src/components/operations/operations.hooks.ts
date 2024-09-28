@@ -50,7 +50,6 @@ export const useOperationsHook = () => {
       columnOrder: data.columns.columnOrder,
       tasks: data.tasks.tasks,
     };
-    console.log(structredData);
     store.setSelectedProject(structredData);
     setNewTaskModal(false);
   };

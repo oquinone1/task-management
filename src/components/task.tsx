@@ -1,12 +1,12 @@
 import { Draggable } from "react-beautiful-dnd";
 
 const TaskComponent = (props: any) => {
-  const { task, className, index } = props || null;
+  const { task, index } = props || null;
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
         <div
-          className={`${className} m-height-[200px]`}
+          className="bg-white rounded h-[50px] mb-[5px]"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
