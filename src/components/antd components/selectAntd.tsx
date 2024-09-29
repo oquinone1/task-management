@@ -1,23 +1,27 @@
-import { Input } from "antd";
+import { Select } from "antd";
 
 const InputAntd = (props: any) => {
   const {
-    placeholder = "",
     value = "",
     onChange = null,
     allowClear = false,
     className = "",
+    options = [],
+    optionRender = null,
+    style,
   } = props || {};
 
   const inputProps = {
-    placeholder,
     value,
     onChange,
     allowClear,
     className,
+    options,
+    optionRender,
+    style,
   };
 
-  return <Input {...inputProps} />;
+  return <Select {...inputProps} />;
 };
 
 export default InputAntd;

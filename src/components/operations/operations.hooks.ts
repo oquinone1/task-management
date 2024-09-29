@@ -10,6 +10,9 @@ export const useOperationsHook = () => {
   const [task, setTask] = useState("");
   const [column, setColum] = useState("");
   const [removeProject, setRemoveProject] = useState(false);
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("");
+  const [date, setDate] = useState(null);
 
   const submitTask = async () => {
     const selectedProject = store.selectedProject;
@@ -23,6 +26,9 @@ export const useOperationsHook = () => {
         [taskName]: {
           id: taskName,
           content: task,
+          description,
+          priority,
+          date,
         },
       },
     };
@@ -133,5 +139,11 @@ export const useOperationsHook = () => {
     setRemoveProject,
     deleteProject,
     store,
+    description,
+    setDescription,
+    priority,
+    setPriority,
+    date,
+    setDate,
   };
 };

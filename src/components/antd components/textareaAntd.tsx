@@ -1,12 +1,15 @@
 import { Input } from "antd";
 
-const InputAntd = (props: any) => {
+const { TextArea } = Input;
+
+const TextareaAntd = (props: any) => {
   const {
     placeholder = "",
     value = "",
     onChange = null,
     allowClear = false,
     className = "",
+    autoSize = false || {},
   } = props || {};
 
   const inputProps = {
@@ -15,9 +18,10 @@ const InputAntd = (props: any) => {
     onChange,
     allowClear,
     className,
+    autoSize,
   };
 
-  return <Input {...inputProps} />;
+  return <TextArea {...inputProps} />;
 };
 
-export default InputAntd;
+export default TextareaAntd;
