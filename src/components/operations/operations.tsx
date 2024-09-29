@@ -79,12 +79,6 @@ const OperationsComponent: React.FC = () => {
           onOk={() => submitTask()}
           onCancel={() => setNewTaskModal(false)}
         >
-          {/*
-           * Summary
-           * Description
-           * Priority
-           * Date
-           */}
           <label>Summary</label>
           <Input
             className="mb-[10px]"
@@ -152,6 +146,7 @@ const OperationsComponent: React.FC = () => {
           open={removeProject}
           onOk={() => deleteProject()}
           onCancel={() => setRemoveProject(false)}
+          okButtonProps={{ style: { backgroundColor: "red" } }}
           okText="Delete"
           title="Would you like to delete this project?"
         />
