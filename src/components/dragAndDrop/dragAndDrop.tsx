@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 // import { initialData } from "../../mock/tasks.mock";
 import { DragDropContext } from "react-beautiful-dnd";
-import ColumnComponent from "../column";
+import ColumnComponent from "../column/column";
 import { useStore } from "../../store/store";
 import DragAndDropSkeletonComponent from "./dragAndDropSkeleton";
 import { useDragAndDropHooks } from "./dragAndDrop.hooks";
