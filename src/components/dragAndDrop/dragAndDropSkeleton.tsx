@@ -12,12 +12,10 @@ const DragAndDropSkeletonComponent = () => {
   //   );
   // });
   return (
-    <section className="flex flex-row justify-between h-full mr-[20px] pt-[20px]">
-      <SkeletonAntd
-        // style={{ minWidth: "250px" }}
-        paragraph={{ rows: 20 }}
-        // active
-      />
+    <section className="mr-[20px]">
+      <SkeletonAntd paragraph={{ rows: 5 }} />
+      <br />
+      <SkeletonAntd paragraph={{ rows: 5 }} />
     </section>
   );
 };
