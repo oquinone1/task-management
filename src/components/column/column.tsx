@@ -1,5 +1,5 @@
 import { Droppable } from "react-beautiful-dnd";
-import TaskComponent from "./task";
+import TaskComponent from "../task/task";
 
 const ColumnComponent = (props: any) => {
   const { column, tasks } = props || null;
@@ -17,7 +17,12 @@ const ColumnComponent = (props: any) => {
             {...provided.droppableProps}
           >
             {tasks.map((task: any, index: number) => (
-              <TaskComponent key={task.id} task={task} index={index} />
+              <TaskComponent
+                key={task.id}
+                task={task}
+                index={index}
+                columnId={column.id}
+              />
             ))}
             {provided.placeholder}
           </div>

@@ -9,8 +9,8 @@ const CardAntd = (props: any) => {
     style = "",
     children,
     className = "",
-    header,
-    body,
+    onClick,
+    onDoubleClick,
   } = props || {};
 
   const inputProps = {
@@ -19,8 +19,8 @@ const CardAntd = (props: any) => {
     style,
     children,
     className,
-    header,
-    body,
+    onClick,
+    onDoubleClick,
   };
   if (meta) inputProps.children = <Meta {...meta} />;
 
