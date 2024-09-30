@@ -36,7 +36,7 @@ const SidebarComponent: React.FC = () => {
         <Modal
           open={modal}
           title="Add Project"
-          okText="Add"
+          okText="Add Project"
           onCancel={() => setModal(false)}
           onOk={() => addProject()}
         >

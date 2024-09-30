@@ -78,6 +78,7 @@ const OperationsComponent: React.FC = () => {
           title="Add Task"
           onOk={() => submitTask()}
           onCancel={() => setNewTaskModal(false)}
+          okText="Add Task"
         >
           <label>Summary</label>
           <Input
@@ -134,6 +135,7 @@ const OperationsComponent: React.FC = () => {
           title="Add Column"
           onOk={() => submitColumn()}
           onCancel={() => setColumnsModal(false)}
+          okText="Add Column"
         >
           <p>Column name</p>
           <Input
