@@ -31,18 +31,22 @@ const TaskComponent = (props: any) => {
       <Draggable draggableId={task.id} index={index}>
         {(provided) => (
           <div
-            className=" h-[100px] mb-[5px]"
+            className=" min-h-[80px] mb-[5px]"
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
             <CardAntd
-              style={{ width: 200 }}
+              style={{ minWidth: 100 }}
               className="rounded"
               onDoubleClick={() => openTaskModal(task)}
             >
               <div>
-                <p className="font-bold">{task.content}</p>
+                <p className="font-bold">
+                  {task.content.length > 15
+                    ? task.content.slice(0, 15)
+                    : task.content}
+                </p>
               </div>
               <div className="flex flex-row justify-between">
                 <span>
