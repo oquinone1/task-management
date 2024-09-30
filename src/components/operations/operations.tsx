@@ -3,12 +3,12 @@ import { lazy, Suspense } from "react";
 import ButtonAntd from "../antd components/buttonAntd";
 import { useOperationsHook } from "./operations.hooks";
 import { priorityList } from "../../config/types";
+import DatePickerAntd from "../antd components/datePickerAntd";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
 const Input = lazy(() => import("../antd components/inputAntd"));
 const Textarea = lazy(() => import("../antd components/textareaAntd"));
 const Select = lazy(() => import("../antd components/selectAntd"));
-const DatePicker = lazy(() => import("../antd components/datePickerAntd"));
 const Space = lazy(() => import("../antd components/spaceAntd"));
 
 const OperationsComponent: React.FC = () => {
@@ -120,7 +120,7 @@ const OperationsComponent: React.FC = () => {
 
             <div className="flex flex-col w-[48%]">
               <label>Due Date</label>
-              <DatePicker
+              <DatePickerAntd
                 placeholder="Select Date"
                 value={date}
                 onChange={(e: any) => setDate(e)}

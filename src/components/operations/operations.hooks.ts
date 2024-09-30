@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useState } from "react";
 import { PostAPICall, GetAPICall, DeleteAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
@@ -12,7 +13,7 @@ export const useOperationsHook = () => {
   const [removeProject, setRemoveProject] = useState(false);
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState<any>(null);
 
   const submitTask = async () => {
     const selectedProject = store.selectedProject;
@@ -108,6 +109,9 @@ export const useOperationsHook = () => {
 
   const openTasksModal = () => {
     setTask("");
+    setPriority("Low");
+    setDate(dayjs(new Date()));
+    setDescription("");
     setNewTaskModal(true);
   };
 
