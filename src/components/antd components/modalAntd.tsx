@@ -9,6 +9,8 @@ const ModalAntd = (props: any) => {
     cancelText = "",
     onCancel = null,
     onOk = null,
+    okButtonProps,
+    cancelButtonProps,
   } = props || {};
 
   const inputProps = {
@@ -19,6 +21,8 @@ const ModalAntd = (props: any) => {
     cancelText,
     onCancel,
     onOk,
+    okButtonProps,
+    cancelButtonProps,
   };
 
   return <Modal {...inputProps} />;

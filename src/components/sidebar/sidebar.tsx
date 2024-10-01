@@ -13,8 +13,8 @@ const SidebarComponent: React.FC = () => {
   const { modal, setModal, addProject, getProjectData } = useSidebarHooks();
 
   return (
-    <section className="border-rounded min-w-[250px] m-[15px] h-[96%] bg-gray-200 rounded-md">
-      <div className="flex justify-end p-[15px]">
+    <section className="border-rounded min-w-[250px] mr-[15px] h-full bg-gray-200 rounded-md">
+      <div className="flex justify-end p-[15px] mt-[14px]">
         <ButtonAntd icon={<PlusOutlined />} onClick={() => setModal(true)}>
           Add Project
         </ButtonAntd>
@@ -35,8 +35,8 @@ const SidebarComponent: React.FC = () => {
       <Suspense>
         <Modal
           open={modal}
-          title="Add new task manager"
-          okText="Add"
+          title="Add Project"
+          okText="Add Project"
           onCancel={() => setModal(false)}
           onOk={() => addProject()}
         >

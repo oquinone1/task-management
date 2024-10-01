@@ -2,7 +2,6 @@ import { useState } from "react";
 import { GetAPICall, PutAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 import { useStore } from "../../store/store";
-import { useSidebarHooks } from "../../components/sidebar/sidebar.hooks";
 
 interface TaskData {
   summary: string;
@@ -15,7 +14,6 @@ export const useTaskHooks = () => {
   const store: any = useStore();
   const [taskModal, setTaskModal] = useState(false);
   const [taskData, setTaskData] = useState<TaskData | any>({});
-  const sidebarHook = useSidebarHooks();
 
   const openTaskModal = (task: any) => {
     setTaskModal(true);
