@@ -9,6 +9,7 @@ import { useTaskHooks } from "./task.hooks";
 import { priorityList } from "../../config/types";
 import SpaceAntd from "../antd components/spaceAntd";
 import dayjs from "dayjs";
+import ButtonAntd from "../antd components/buttonAntd";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
 const Input = lazy(() => import("../antd components/inputAntd"));
@@ -17,7 +18,7 @@ const Select = lazy(() => import("../antd components/selectAntd"));
 const DatePicker = lazy(() => import("../antd components/datePickerAntd"));
 
 const TaskComponent = (props: any) => {
-  const { task, index } = props || null;
+  const { task, index, columnId } = props || null;
   const {
     taskModal,
     setTaskModal,
@@ -25,6 +26,7 @@ const TaskComponent = (props: any) => {
     taskData,
     setTaskData,
     updateTask,
+    removeTask,
   } = useTaskHooks();
   return (
     <>
@@ -76,9 +78,14 @@ const TaskComponent = (props: any) => {
         <Modal
           open={taskModal}
           title="Task"
-          okText="Update"
-          onOk={() => updateTask(task.id)}
           onCancel={() => setTaskModal(false)}
+          footer={modalFooter({
+            id: task.id,
+            columnId,
+            updateTask,
+            setTaskModal,
+            removeTask,
+          })}
         >
           <label>Summary</label>
           <Input
@@ -147,6 +154,34 @@ const TaskComponent = (props: any) => {
           </div>
         </Modal>
       </Suspense>
+    </>
+  );
+};
+
+const modalFooter = (props: any) => {
+  const { id, setTaskModal, updateTask, removeTask, columnId } = props || {};
+
+  return (
+    <>
+      <ButtonAntd
+        type=""
+        onClick={(e: any) => {
+          e.stopPropagation();
+          setTaskModal(false);
+        }}
+      >
+        Cancel
+      </ButtonAntd>
+      <ButtonAntd danger onClick={() => removeTask({ taskId: id, columnId })}>
+        Delete
+      </ButtonAntd>
+      <ButtonAntd
+        onClick={() => {
+          updateTask(id);
+        }}
+      >
+        Update
+      </ButtonAntd>
     </>
   );
 };

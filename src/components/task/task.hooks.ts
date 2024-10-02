@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GetAPICall, PutAPICall } from "../../apis/apis";
+import { GetAPICall, PutAPICall, DeleteAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 import { useStore } from "../../store/store";
 
@@ -47,6 +47,31 @@ export const useTaskHooks = () => {
       tasks: res.tasks.tasks,
     };
     store.setSelectedProject(structredData);
+  };
+
+  const removeTask = async (props: any) => {
+    const { taskId, columnId } = props || {};
+    const taskData = {
+      id: store.projectId,
+      taskId,
+    };
+
+    const columnData = {
+      ...taskData,
+      columnName: columnId,
+    };
+
+    await DeleteAPICall({ url: urls.removeTask, data: taskData });
+    await DeleteAPICall({ url: urls.removeTaskFromTaskIds, data: columnData });
+    const url: string = `${urls.getProjectData}?id=${store.projectId}`;
+    const res: any = await GetAPICall({ url });
+    const structredData = {
+      id: res.id,
+      columns: res.columns.columns,
+      columnOrder: res.columns.columnOrder,
+      tasks: res.tasks.tasks,
+    };
+    store.setSelectedProject(structredData);
     setTaskModal(false);
   };
 
@@ -57,5 +82,6 @@ export const useTaskHooks = () => {
     taskData,
     setTaskData,
     updateTask,
+    removeTask,
   };
 };
