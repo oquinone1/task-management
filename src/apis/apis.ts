@@ -52,12 +52,14 @@ export const PutAPICall = async (props: any) => {
 
 // DELETE
 export const DeleteAPICall = async (props: any) => {
-  const { url, options } = props || {};
+  const { url, options, data } = props || {};
 
   let moreOptions = {
     method: "DELETE",
     ...options,
   };
+
+  if (data) moreOptions.body = JSON.stringify(data);
 
   const response = await fetch(url, { ...moreOptions });
   const res = await response.json();

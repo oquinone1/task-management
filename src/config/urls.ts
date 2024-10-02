@@ -7,4 +7,6 @@ export const urls: any = {
   removeProject: "http://localhost:8080/removeProject",
   replaceColumns: "http://localhost:8080/replaceColumns",
   updateTask: "http://localhost:8080/updateTask",
+  removeTask: "http://localhost:8080/removeTask",
+  removeTaskFromTaskIds: "http://localhost:8080/removeTaskId",
 };

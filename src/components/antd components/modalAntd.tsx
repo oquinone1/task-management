@@ -11,6 +11,9 @@ const ModalAntd = (props: any) => {
     onOk = null,
     okButtonProps,
     cancelButtonProps,
+    footer,
+    closable = true,
+    maskClosable = true,
   } = props || {};
 
   const inputProps = {
@@ -23,6 +26,9 @@ const ModalAntd = (props: any) => {
     onOk,
     okButtonProps,
     cancelButtonProps,
+    footer,
+    closable,
+    maskClosable,
   };
 
   return <Modal {...inputProps} />;
