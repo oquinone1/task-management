@@ -176,7 +176,8 @@ const modalFooter = (props: any) => {
         Delete
       </ButtonAntd>
       <ButtonAntd
-        onClick={() => {
+        onClick={(e: any) => {
+          e.stopPropagation();
           updateTask(id);
         }}
       >

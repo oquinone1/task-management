@@ -47,6 +47,7 @@ export const useTaskHooks = () => {
       tasks: res.tasks.tasks,
     };
     store.setSelectedProject(structredData);
+    setTaskModal(false);
   };
 
   const removeTask = async (props: any) => {
