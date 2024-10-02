@@ -1,9 +1,16 @@
-import { DeleteOutlined, DiffOutlined, FormOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  DiffOutlined,
+  FormOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
 import { lazy, Suspense } from "react";
 import ButtonAntd from "../antd components/buttonAntd";
 import { useOperationsHook } from "./operations.hooks";
 import { priorityList } from "../../config/types";
 import DatePickerAntd from "../antd components/datePickerAntd";
+import { PlusOutlined } from "@ant-design/icons";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
 const Input = lazy(() => import("../antd components/inputAntd"));
@@ -17,8 +24,8 @@ const OperationsComponent: React.FC = () => {
     setNewTaskModal,
     columnsModal,
     setColumnsModal,
-    task,
-    setTask,
+    taskContent,
+    setTaskContent,
     submitTask,
     column,
     setColum,
@@ -29,49 +36,67 @@ const OperationsComponent: React.FC = () => {
     setRemoveProject,
     deleteProject,
     store,
-    description,
-    setDescription,
-    setPriority,
-    priority,
-    date,
-    setDate,
+    modalAddProject,
+    setModalAddProject,
+    addProject,
   } = useOperationsHook();
 
   return (
-    <div className="w-full box-border m-[15px] ml-[5px] py-[15px]">
-      <ButtonAntd
-        disabled={!store?.projectId}
-        onClick={() => {
-          openColumnsModal();
-        }}
-        icon={<DiffOutlined />}
-        className="mr-[10px]"
-      >
-        Add Column
-      </ButtonAntd>
-      <ButtonAntd
-        disabled={
-          !store.projectId
-            ? !store.projectId
-            : store?.selectedProject?.columns !== null
-            ? false
-            : true
-        }
-        className="mr-[10px]"
-        icon={<FormOutlined />}
-        onClick={() => openTasksModal()}
-      >
-        Add Task
-      </ButtonAntd>
-      <ButtonAntd
-        disabled={!store.projectId}
-        className="mr-[10px]"
-        onClick={() => setRemoveProject(true)}
-        icon={<DeleteOutlined />}
-        danger
-      >
-        Delete Project
-      </ButtonAntd>
+    <div className="w-full px-[25px] flex flex-row justify-between bg-gray-200 rounded">
+      <span>
+        <ButtonAntd
+          onClick={() => store.setSidebarCollapse(!store.sidebarCollapse)}
+        >
+          {store.sidebarCollapse ? (
+            <MenuUnfoldOutlined />
+          ) : (
+            <MenuFoldOutlined />
+          )}
+        </ButtonAntd>
+      </span>
+      <div>
+        <ButtonAntd
+          icon={<PlusOutlined />}
+          className="mr-[10px]"
+          onClick={() => setModalAddProject(true)}
+        >
+          Add Project
+        </ButtonAntd>
+        <ButtonAntd
+          disabled={!store?.projectId}
+          onClick={() => {
+            openColumnsModal();
+          }}
+          icon={<DiffOutlined />}
+          className="mr-[10px]"
+        >
+          Add Column
+        </ButtonAntd>
+        <ButtonAntd
+          disabled={
+            !store.projectId
+              ? !store.projectId
+              : store?.selectedProject?.columns !== null
+              ? false
+              : true
+          }
+          className="mr-[10px]"
+          icon={<FormOutlined />}
+          onClick={() => openTasksModal()}
+        >
+          Add Task
+        </ButtonAntd>
+        <ButtonAntd
+          disabled={!store.projectId}
+          className="mr-[10px]"
+          onClick={() => setRemoveProject(true)}
+          icon={<DeleteOutlined />}
+          danger
+        >
+          Delete Project
+        </ButtonAntd>
+      </div>
+
       <Suspense>
         <Modal
           open={newTaskModal}
@@ -84,16 +109,26 @@ const OperationsComponent: React.FC = () => {
           <Input
             className="mb-[10px]"
             placeholder="Ex. Add APIs"
-            value={task}
-            onChange={(e: any) => setTask(e.target.value)}
+            value={taskContent.summary}
+            onChange={(e: any) =>
+              setTaskContent({
+                ...taskContent,
+                summary: e.target.value,
+              })
+            }
           />
 
           <label>Description</label>
           <Textarea
             className="mb-[10px]"
             placeholder="Ex. Connect backend API to display user list"
-            value={description}
-            onChange={(e: any) => setDescription(e.target.value)}
+            value={taskContent.description}
+            onChange={(e: any) =>
+              setTaskContent({
+                ...taskContent,
+                description: e.target.value,
+              })
+            }
             autoSize={{ minRows: 6, maxRows: 6 }}
           />
 
@@ -103,8 +138,13 @@ const OperationsComponent: React.FC = () => {
               <Select
                 className="mb-[10px]"
                 placeholder="Ex. Add new styling"
-                value={priority}
-                onChange={(e: any) => setPriority(e)}
+                value={taskContent.priority}
+                onChange={(e: any) =>
+                  setTaskContent({
+                    ...taskContent,
+                    priority: e,
+                  })
+                }
                 options={priorityList}
                 style={{ width: "200px" }}
                 optionRender={(option: any) => (
@@ -123,8 +163,13 @@ const OperationsComponent: React.FC = () => {
               <label>Due Date</label>
               <DatePickerAntd
                 placeholder="Select Date"
-                value={date}
-                onChange={(e: any) => setDate(e)}
+                value={taskContent.date}
+                onChange={(e: any) =>
+                  setTaskContent({
+                    ...taskContent,
+                    date: e,
+                  })
+                }
                 allowClear
               />
             </div>
@@ -152,6 +197,21 @@ const OperationsComponent: React.FC = () => {
           okText="Delete"
           title="Would you like to delete this project?"
         />
+
+        <Modal
+          open={modalAddProject}
+          title="Add Project"
+          okText="Add Project"
+          onCancel={() => setModalAddProject(false)}
+          onOk={() => addProject()}
+        >
+          <Input
+            value={store.projectTitle}
+            onChange={(e: any) => store.setProjectTitle(e.target.value)}
+            placeholder="Ex. React Frontend Project"
+            allowClear
+          />
+        </Modal>
       </Suspense>
     </div>
   );

@@ -5,7 +5,7 @@ import "./column.css";
 const ColumnComponent = (props: any) => {
   const { column, tasks } = props || null;
   return (
-    <section className="flex flex-col bg-gray-100 px-[10px] pt-[10px] pb-[5px] mr-[30px] max-h-[40em] rounded-md">
+    <section className="flex flex-col bg-gray-100 px-[10px] pt-[10px] pb-[5px] mr-[30px] min-h-[200px] max-h-full rounded-md">
       <h2 className="">{column.title}</h2>
       <Droppable droppableId={column.id}>
         {(provided) => (
