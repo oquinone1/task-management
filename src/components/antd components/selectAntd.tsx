@@ -1,6 +1,6 @@
 import { Select } from "antd";
 
-const InputAntd = (props: any) => {
+const SelectAntd = (props: any) => {
   const {
     value = "",
     onChange = null,
@@ -24,4 +24,4 @@ const InputAntd = (props: any) => {
   return <Select {...inputProps} />;
 };
 
-export default InputAntd;
+export default SelectAntd;

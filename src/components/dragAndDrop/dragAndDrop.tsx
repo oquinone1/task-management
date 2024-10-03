@@ -12,7 +12,7 @@ const DragAndDropComponent = () => {
     <Suspense fallback={<div>Loading...</div>}>
       {Object.keys(store.selectedProject).length > 0 ? (
         <DragDropContext onDragEnd={onDragEnd}>
-          <section className="flex flex-row w-[92%] min-h-[200px] bg-white">
+          <section className="flex flex-row w-[100%] h-full bg-white p-[20px] rounded">
             {data?.columnOrder?.map((columnId: string) => {
               const column: any = data.columns[columnId];
               const tasks: any = column.taskIds.map(

@@ -1,17 +1,31 @@
 import DragAndDropComponent from "./components/dragAndDrop/dragAndDrop";
 import SidebarComponent from "./components/sidebar/sidebar";
 import OperationsComponent from "./components/operations/operations";
+import { Layout } from "antd";
+const { Header, Sider, Content } = Layout;
+import { useStore } from "./store/store";
 // import "./App.css";
 
 function App() {
+  const store: any = useStore();
+
   return (
-    <div className="flex flex-row h-screen overflow-hidden bg-white">
-      <SidebarComponent />
-      <div className="w-full h-screen">
-        <OperationsComponent />
-        <DragAndDropComponent />
-      </div>
-    </div>
+    <Layout className="h-screen">
+      <Sider trigger={null} collapsible collapsed={store.sidebarCollapse}>
+        <SidebarComponent />
+      </Sider>
+      <Layout>
+        <Header
+          style={{ padding: 0 }}
+          className="mx-[25px] rounded my-[10px] bg-gray-200"
+        >
+          <OperationsComponent />
+        </Header>
+        <Content className="m-[25px] my-[10px] h-screen">
+          <DragAndDropComponent />
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
 

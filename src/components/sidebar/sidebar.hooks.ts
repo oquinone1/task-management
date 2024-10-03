@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useStore } from "../../store/store";
-import { GetAPICall, PostAPICall } from "../../apis/apis";
+import { GetAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 // import { items } from "../../mock/menu.mock";
 // import { taskData } from "../../mock/tasks.mock";
 
 export const useSidebarHooks = () => {
-  const [modal, setModal] = useState(false);
   const store: any = useStore();
 
   useEffect(() => {
@@ -17,29 +16,6 @@ export const useSidebarHooks = () => {
 
     getProjects();
   }, []);
-
-  useEffect(() => {
-    if (!modal) {
-      const getProjects = async () => {
-        const data: any = await GetAPICall({ url: urls.getProjectTitles });
-        store.setMenuItems(data);
-      };
-
-      getProjects();
-    }
-  }, [modal]);
-
-  const addProject = async () => {
-    let currentItems = store.menuItems || 0;
-    let label = store.projectTitle;
-    let key = `${label}-${currentItems.length + 1}`;
-    let data = { key, label };
-    // let newMenu = [...currentItems, { ...newItem }];
-    // store.setMenuItems(newMenu);
-    store.setProjectTitle("");
-    await PostAPICall({ url: urls.addProject, data });
-    setModal(false);
-  };
 
   const getProjectData = async (key: string) => {
     const menuItems = store.menuItems;
@@ -65,5 +41,7 @@ export const useSidebarHooks = () => {
     store.setSelectedProject(structredData);
   };
 
-  return { modal, setModal, addProject, getProjectData };
+  return {
+    getProjectData,
+  };
 };
