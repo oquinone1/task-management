@@ -1,0 +1,1 @@
+import{Y as r}from"./index-D44a1Rl9.js";import{I as p}from"./index-D4dGq8Kw.js";const c=t=>{const{placeholder:o="",value:s="",onChange:a=null,allowClear:n=!1,className:e=""}=t||{},l={placeholder:o,value:s,onChange:a,allowClear:n,className:e};return r.jsx(p,{...l})};export{c as default};
