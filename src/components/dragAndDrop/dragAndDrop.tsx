@@ -17,7 +17,7 @@ const DragAndDropComponent = () => {
             className="flex flex-row w-[100%] h-full p-[20px] rounded"
             style={{
               backgroundColor: `${
-                store.theme === colorThemes.lightTheme ? "#FFF" : "#001529"
+                store.theme === colorThemes.lightTheme ? "#DCDCDC" : "#001529"
               }`,
             }}
           >

@@ -48,7 +48,7 @@ const OperationsComponent: React.FC = () => {
       className="w-full px-[25px] flex flex-row justify-between rounded"
       style={{
         backgroundColor: `${
-          store.theme === colorThemes.lightTheme ? "#FFF" : "#001529"
+          store.theme === colorThemes.lightTheme ? "#DCDCDC" : "#001529"
         }`,
       }}
     >
@@ -56,6 +56,7 @@ const OperationsComponent: React.FC = () => {
         <ButtonAntd
           onClick={() => store.setSidebarCollapse(!store.sidebarCollapse)}
           className="mr-[10px]"
+          ghost={store.theme == colorThemes.lightTheme ? false : true}
         >
           {store.sidebarCollapse ? (
             <MenuUnfoldOutlined />
@@ -78,6 +79,7 @@ const OperationsComponent: React.FC = () => {
           icon={<PlusOutlined />}
           className="mr-[10px]"
           onClick={() => setModalAddProject(true)}
+          ghost={store.theme == colorThemes.lightTheme ? false : true}
         >
           Add Project
         </ButtonAntd>
@@ -88,6 +90,7 @@ const OperationsComponent: React.FC = () => {
           }}
           icon={<DiffOutlined />}
           className="mr-[10px]"
+          ghost={store.theme == colorThemes.lightTheme ? false : true}
         >
           Add Column
         </ButtonAntd>
@@ -102,6 +105,7 @@ const OperationsComponent: React.FC = () => {
           className="mr-[10px]"
           icon={<FormOutlined />}
           onClick={() => openTasksModal()}
+          ghost={store.theme == colorThemes.lightTheme ? false : true}
         >
           Add Task
         </ButtonAntd>
@@ -111,6 +115,7 @@ const OperationsComponent: React.FC = () => {
           onClick={() => setRemoveProject(true)}
           icon={<DeleteOutlined />}
           danger
+          ghost={store.theme == colorThemes.lightTheme ? false : true}
         >
           Delete Project
         </ButtonAntd>

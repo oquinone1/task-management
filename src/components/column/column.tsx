@@ -10,11 +10,18 @@ const ColumnComponent = (props: any) => {
   return (
     <section
       className={`flex flex-col px-[10px] pt-[10px] pb-[5px] mr-[30px] min-h-[200px] max-h-full rounded-md ${
-        store.theme === colorThemes.lightTheme ? "bg-gray-200" : "bg-slate-600"
+        store.theme === colorThemes.lightTheme
+          ? ""
+          : "bg-transparent border-2 border-slate-300"
       }`}
+      style={{
+        backgroundColor: `${
+          store.theme === colorThemes.lightTheme ? "#ECECEC" : ""
+        }`,
+      }}
     >
       <h2
-        className={`${
+        className={`pb-[15px] ${
           store.theme === colorThemes.lightTheme ? "text-black" : "text-white"
         }`}
       >

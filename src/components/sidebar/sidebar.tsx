@@ -1,6 +1,8 @@
 import MenuAntd from "../antd components/menuAntd";
 import { useStore } from "../../store/store";
 import { useSidebarHooks } from "./sidebar.hooks";
+import "./sidebar.css";
+import { colorThemes } from "../../config/types";
 
 const SidebarComponent: React.FC = () => {
   const store: any = useStore();
@@ -19,7 +21,16 @@ const SidebarComponent: React.FC = () => {
           mode="inline"
         />
       ) : (
-        <div className="text-black h-full text-center place-content-center">
+        <div
+          className={`h-full text-center place-content-center ${
+            store.theme === colorThemes.lightTheme ? "text-black" : "text-white"
+          }`}
+          style={{
+            backgroundColor: `${
+              store.theme === colorThemes.lightTheme ? "#ECECEC" : ""
+            }`,
+          }}
+        >
           Please add a project
         </div>
       )}

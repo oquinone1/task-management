@@ -35,7 +35,7 @@ const TaskComponent = (props: any) => {
       <Draggable draggableId={task.id} index={index}>
         {(provided) => (
           <div
-            className=" min-h-[80px] mb-[5px]"
+            className=" min-h-[80px] mb-[10px]"
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
@@ -43,7 +43,6 @@ const TaskComponent = (props: any) => {
             <CardAntd
               style={{
                 minWidth: 100,
-                border: "none",
                 backgroundColor: `${
                   store.theme === colorThemes.lightTheme ? "#FFF" : "#001529"
                 }`,
@@ -51,7 +50,11 @@ const TaskComponent = (props: any) => {
                   store.theme === colorThemes.lightTheme ? "black" : "white"
                 }`,
               }}
-              className="rounded"
+              className={`${
+                store.theme === colorThemes.lightTheme
+                  ? "border-2 border-white"
+                  : ""
+              }`}
               onDoubleClick={() => openTaskModal(task)}
             >
               <div>
