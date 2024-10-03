@@ -11,6 +11,8 @@ import { useOperationsHook } from "./operations.hooks";
 import { priorityList } from "../../config/types";
 import DatePickerAntd from "../antd components/datePickerAntd";
 import { PlusOutlined } from "@ant-design/icons";
+import SwitchAntd from "../antd components/switchAntd";
+import { colorThemes } from "../../config/types";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
 const Input = lazy(() => import("../antd components/inputAntd"));
@@ -42,10 +44,18 @@ const OperationsComponent: React.FC = () => {
   } = useOperationsHook();
 
   return (
-    <div className="w-full px-[25px] flex flex-row justify-between bg-gray-200 rounded">
+    <div
+      className="w-full px-[25px] flex flex-row justify-between rounded"
+      style={{
+        backgroundColor: `${
+          store.theme === colorThemes.lightTheme ? "#FFF" : "#001529"
+        }`,
+      }}
+    >
       <span>
         <ButtonAntd
           onClick={() => store.setSidebarCollapse(!store.sidebarCollapse)}
+          className="mr-[10px]"
         >
           {store.sidebarCollapse ? (
             <MenuUnfoldOutlined />
@@ -53,6 +63,15 @@ const OperationsComponent: React.FC = () => {
             <MenuFoldOutlined />
           )}
         </ButtonAntd>
+        <SwitchAntd
+          checkedChildren="Light"
+          unCheckedChildren="Dark"
+          onChange={() =>
+            store.setTheme(
+              store.theme === colorThemes.lightTheme ? "dark" : "light"
+            )
+          }
+        />
       </span>
       <div>
         <ButtonAntd

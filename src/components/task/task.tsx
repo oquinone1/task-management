@@ -10,6 +10,7 @@ import { priorityList } from "../../config/types";
 import SpaceAntd from "../antd components/spaceAntd";
 import dayjs from "dayjs";
 import ButtonAntd from "../antd components/buttonAntd";
+import { colorThemes } from "../../config/types";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
 const Input = lazy(() => import("../antd components/inputAntd"));
@@ -27,6 +28,7 @@ const TaskComponent = (props: any) => {
     setTaskData,
     updateTask,
     removeTask,
+    store,
   } = useTaskHooks();
   return (
     <>
@@ -39,7 +41,16 @@ const TaskComponent = (props: any) => {
             ref={provided.innerRef}
           >
             <CardAntd
-              style={{ minWidth: 100 }}
+              style={{
+                minWidth: 100,
+                border: "none",
+                backgroundColor: `${
+                  store.theme === colorThemes.lightTheme ? "#FFF" : "#001529"
+                }`,
+                color: `${
+                  store.theme === colorThemes.lightTheme ? "black" : "white"
+                }`,
+              }}
               className="rounded"
               onDoubleClick={() => openTaskModal(task)}
             >

@@ -84,5 +84,6 @@ export const useTaskHooks = () => {
     setTaskData,
     updateTask,
     removeTask,
+    store,
   };
 };

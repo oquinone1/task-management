@@ -15,10 +15,7 @@ function App() {
         <SidebarComponent />
       </Sider>
       <Layout>
-        <Header
-          style={{ padding: 0 }}
-          className="mx-[25px] rounded my-[10px] bg-gray-200"
-        >
+        <Header style={{ padding: 0 }} className="mx-[25px] rounded my-[10px]">
           <OperationsComponent />
         </Header>
         <Content className="m-[25px] my-[10px] h-screen">

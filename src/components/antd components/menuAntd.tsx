@@ -7,6 +7,7 @@ const MenuAntd = (props: any) => {
     className = "",
     inlineCollapsed = false,
     mode,
+    theme,
   } = props || {};
 
   const inputProps = {
@@ -15,6 +16,7 @@ const MenuAntd = (props: any) => {
     className,
     inlineCollapsed,
     mode,
+    theme,
   };
   return <Menu {...inputProps} />;
 };
