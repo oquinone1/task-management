@@ -12,4 +12,5 @@ export default defineConfig({
     globals: true, // Allows using global test functions like "describe", "it", etc.
     setupFiles: "./src/setupTests.js", // Path to the setup file for Jest matchers
   },
+  base: "/task-management",
 });
