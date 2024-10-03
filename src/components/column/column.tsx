@@ -1,12 +1,25 @@
 import { Droppable } from "react-beautiful-dnd";
 import TaskComponent from "../task/task";
+import { useStore } from "../../store/store";
+import { colorThemes } from "../../config/types";
 import "./column.css";
 
 const ColumnComponent = (props: any) => {
+  const store: any = useStore();
   const { column, tasks } = props || null;
   return (
-    <section className="flex flex-col bg-gray-100 px-[10px] pt-[10px] pb-[5px] mr-[30px] min-h-[200px] max-h-full rounded-md">
-      <h2 className="">{column.title}</h2>
+    <section
+      className={`flex flex-col px-[10px] pt-[10px] pb-[5px] mr-[30px] min-h-[200px] max-h-full rounded-md ${
+        store.theme === colorThemes.lightTheme ? "bg-gray-200" : "bg-slate-600"
+      }`}
+    >
+      <h2
+        className={`${
+          store.theme === colorThemes.lightTheme ? "text-black" : "text-white"
+        }`}
+      >
+        {column.title}
+      </h2>
       <Droppable droppableId={column.id}>
         {(provided) => (
           <div

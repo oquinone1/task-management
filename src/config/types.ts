@@ -29,3 +29,8 @@ export const priorityList = [
     color: "primary",
   },
 ];
+
+export enum colorThemes {
+  lightTheme = "light",
+  darkTheme = "dark",
+}

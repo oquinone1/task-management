@@ -10,15 +10,16 @@ const SidebarComponent: React.FC = () => {
     <>
       {store.menuItems && store.menuItems.length > 0 ? (
         <MenuAntd
+          theme={store.theme}
           items={store.menuItems}
-          className={`bg-gray-200 h-full py-[20px]`}
+          className={`h-full py-[20px]`}
           onClick={(e: any) => {
             getProjectData(e.key);
           }}
           mode="inline"
         />
       ) : (
-        <div className="h-[45%] text-center place-content-end">
+        <div className="text-black h-full text-center place-content-center">
           Please add a project
         </div>
       )}

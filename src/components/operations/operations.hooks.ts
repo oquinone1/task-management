@@ -127,7 +127,7 @@ export const useOperationsHook = () => {
     setTaskContent({
       summary: "",
       description: "",
-      priority: "",
+      priority: "Low",
       date: dayjs(new Date()),
     });
     setNewTaskModal(true);
