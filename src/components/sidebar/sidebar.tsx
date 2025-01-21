@@ -3,6 +3,7 @@ import { useStore } from "../../store/store";
 import { useSidebarHooks } from "./sidebar.hooks";
 import "./sidebar.css";
 import { colorThemes } from "../../config/types";
+import SpinAntd from "../antd components/spinnerAntd";
 
 const SidebarComponent: React.FC = () => {
   const store: any = useStore();
@@ -20,6 +21,10 @@ const SidebarComponent: React.FC = () => {
           }}
           mode="inline"
         />
+      ) : store.menuItemsLoading ? (
+        <div style={{ color: "white" }}>
+          <SpinAntd />
+        </div>
       ) : (
         <div
           className={`h-full text-center place-content-center ${

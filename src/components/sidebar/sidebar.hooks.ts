@@ -12,6 +12,7 @@ export const useSidebarHooks = () => {
     const getProjects = async () => {
       const data: any = await GetAPICall({ url: urls.getProjectTitles });
       store.setMenuItems(data);
+      store.setMenuItemsLoading(false);
     };
 
     getProjects();

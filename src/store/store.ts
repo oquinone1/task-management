@@ -6,6 +6,7 @@ export const useStore = create((set) => ({
   projectId: "", // currently selected project ID
   projectTitle: "", // title for adding a new project
   sidebarCollapse: false,
+  menuItemsLoading: true,
   theme: "dark",
 
   setMenuItems: (newMenu: []) => set(() => ({ menuItems: newMenu })),
@@ -22,4 +23,6 @@ export const useStore = create((set) => ({
   setSidebarCollapse: (collapse: boolean) =>
     set(() => ({ sidebarCollapse: collapse })),
   setTheme: (newTheme: string) => set(() => ({ theme: newTheme })),
+  setMenuItemsLoading: (loading: boolean) =>
+    set(() => ({ menuItemsLoading: loading })),
 }));
