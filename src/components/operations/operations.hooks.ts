@@ -25,6 +25,7 @@ export const useOperationsHook = () => {
       const getProjects = async () => {
         const data: any = await GetAPICall({ url: urls.getProjectTitles });
         store.setMenuItems(data);
+        store.setProjectTitle("");
       };
 
       getProjects();
