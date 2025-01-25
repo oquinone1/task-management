@@ -1,0 +1,1 @@
+import{Y as p}from"./index-Cb_balkL.js";import{I as u}from"./index-BW7HASaO.js";const{TextArea:c}=u,i=t=>{const{placeholder:a="",value:e="",onChange:o=null,allowClear:s=!1,className:r="",autoSize:n={}}=t||{},l={placeholder:a,value:e,onChange:o,allowClear:s,className:r,autoSize:n};return p.jsx(c,{...l})};export{i as default};
