@@ -19,7 +19,16 @@ function App() {
           <OperationsComponent />
         </Header>
         <Content className="m-[25px] my-[10px] h-screen">
-          <DragAndDropComponent />
+          <div
+            style={{
+              overflowX: "scroll",
+              height: "100%",
+              backgroundColor: "#001529",
+              borderRadius: "7px",
+            }}
+          >
+            <DragAndDropComponent />
+          </div>
         </Content>
       </Layout>
     </Layout>
