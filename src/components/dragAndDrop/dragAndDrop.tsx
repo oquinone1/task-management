@@ -14,7 +14,7 @@ const DragAndDropComponent = () => {
       {Object.keys(store.selectedProject).length > 0 ? (
         <DragDropContext onDragEnd={onDragEnd}>
           <section
-            className="flex flex-row w-[100%] h-full p-[20px] rounded"
+            className="flex flex-row w-[100%] h-full py-[20px] rounded"
             style={{
               backgroundColor: `${
                 store.theme === colorThemes.lightTheme ? "#DCDCDC" : "#001529"

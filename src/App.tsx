@@ -4,6 +4,8 @@ import OperationsComponent from "./components/operations/operations";
 import { Layout } from "antd";
 const { Header, Sider, Content } = Layout;
 import { useStore } from "./store/store";
+import { getTheme } from "./utility/utility";
+
 // import "./App.css";
 
 function App() {
@@ -21,13 +23,22 @@ function App() {
         <Content className="m-[25px] my-[10px] h-screen">
           <div
             style={{
-              overflowX: "scroll",
+              padding: "0 10px",
+              backgroundColor: getTheme(store.theme),
               height: "100%",
-              backgroundColor: "#001529",
               borderRadius: "7px",
             }}
           >
-            <DragAndDropComponent />
+            <div
+              style={{
+                overflowX: "scroll",
+                height: "100%",
+                backgroundColor: getTheme(store.theme),
+                borderRadius: "7px",
+              }}
+            >
+              <DragAndDropComponent />
+            </div>
           </div>
         </Content>
       </Layout>
