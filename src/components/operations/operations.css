@@ -1,0 +1,4 @@
+.ant-btn-background-ghost.ant-btn[disabled].btnDisableDark {
+  color: rgba(156, 156, 156, 0.6);
+  border-color: rgba(134, 134, 134, 0.4);
+}

@@ -13,6 +13,8 @@ import DatePickerAntd from "../antd components/datePickerAntd";
 import { PlusOutlined } from "@ant-design/icons";
 import SwitchAntd from "../antd components/switchAntd";
 import { colorThemes } from "../../config/types";
+// import { getTheme } from "../../utility/utility";
+import "./operations.css";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
 const Input = lazy(() => import("../antd components/inputAntd"));
@@ -89,7 +91,9 @@ const OperationsComponent: React.FC = () => {
             openColumnsModal();
           }}
           icon={<DiffOutlined />}
-          className="mr-[10px]"
+          className={`mr-[10px] ${
+            store.theme == colorThemes.lightTheme ? "" : "btnDisableDark"
+          }`}
           ghost={store.theme == colorThemes.lightTheme ? false : true}
         >
           Add Column
@@ -102,7 +106,9 @@ const OperationsComponent: React.FC = () => {
               ? false
               : true
           }
-          className="mr-[10px]"
+          className={`mr-[10px] ${
+            store.theme == colorThemes.lightTheme ? "" : "btnDisableDark"
+          }`}
           icon={<FormOutlined />}
           onClick={() => openTasksModal()}
           ghost={store.theme == colorThemes.lightTheme ? false : true}
@@ -111,7 +117,9 @@ const OperationsComponent: React.FC = () => {
         </ButtonAntd>
         <ButtonAntd
           disabled={!store.projectId}
-          className="mr-[10px]"
+          className={`mr-[10px] ${
+            store.theme == colorThemes.lightTheme ? "" : "btnDisableDark"
+          }`}
           onClick={() => setRemoveProject(true)}
           icon={<DeleteOutlined />}
           danger
@@ -228,6 +236,12 @@ const OperationsComponent: React.FC = () => {
           okText="Add Project"
           onCancel={() => setModalAddProject(false)}
           onOk={() => addProject()}
+          // styles={{
+          //   content: { backgroundColor: getTheme(store.theme) },
+          //   header: {
+          //     backgroundColor: getTheme(store.theme),
+          //   },
+          // }}
         >
           <Input
             value={store.projectTitle}
