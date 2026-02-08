@@ -1,0 +1,5 @@
+/* Only applies when dark mode is active */
+.dark-mode .ant-skeleton-content .ant-skeleton-title,
+.dark-mode .ant-skeleton-content .ant-skeleton-paragraph > li {
+  background-color: #22222e !important;
+}

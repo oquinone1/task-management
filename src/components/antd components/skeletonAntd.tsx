@@ -1,13 +1,14 @@
 import { Skeleton } from "antd";
 
 const SkeletonAntd = (props: any) => {
-  const { node, style, active, children, paragraph } = props || {};
+  const { node, style, active, children, paragraph, className } = props || {};
 
   const inputProps = {
     style,
     active,
     children,
     paragraph,
+    className,
   };
 
   if (node) {
