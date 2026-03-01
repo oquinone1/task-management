@@ -7,6 +7,7 @@ const InputAntd = (props: any) => {
     onChange = null,
     allowClear = false,
     className = "",
+    style = "",
   } = props || {};
 
   const inputProps = {
@@ -15,6 +16,7 @@ const InputAntd = (props: any) => {
     onChange,
     allowClear,
     className,
+    style,
   };
 
   return <Input {...inputProps} />;

@@ -13,7 +13,7 @@ import DatePickerAntd from "../antd components/datePickerAntd";
 import { PlusOutlined } from "@ant-design/icons";
 import SwitchAntd from "../antd components/switchAntd";
 import { colorThemes } from "../../config/types";
-// import { getTheme } from "../../utility/utility";
+import { getTheme } from "../../utility/utility";
 import "./operations.css";
 
 const Modal = lazy(() => import("../antd components/modalAntd"));
@@ -44,6 +44,54 @@ const OperationsComponent: React.FC = () => {
     setModalAddProject,
     addProject,
   } = useOperationsHook();
+
+  const btnStyling = (color: string = "#1677FF") => {
+    return {
+      style: {
+        backgroundColor: `${
+          store.theme === colorThemes.lightTheme ? "" : "transparent"
+        }`,
+        border: `${
+          store.theme === colorThemes.lightTheme ? "" : `1px solid ${color}`
+        }`,
+        color: `${store.theme === colorThemes.lightTheme ? "" : `${color}`}`,
+      },
+    };
+  };
+
+  const modalStyle = {
+    title: { color: "#ffffff" },
+    content: { backgroundColor: getTheme(store.theme) },
+    header: {
+      backgroundColor: getTheme(store.theme),
+    },
+  };
+
+  const modalTitle = (title: string) => {
+    return (
+      <span
+        style={{
+          color: `${store.theme === colorThemes.lightTheme ? "" : "#fff"}`,
+        }}
+      >
+        {title}
+      </span>
+    );
+  };
+
+  const inputStyle = {
+    backgroundColor: `${
+      store.theme === colorThemes.lightTheme ? "" : getTheme(store.theme)
+    }`,
+    color: `${store.theme === colorThemes.lightTheme ? "" : "#fff"}`,
+    border: `${
+      store.theme === colorThemes.lightTheme ? "" : "1px solid white"
+    }`,
+  };
+
+  const taskLabelStyle = {
+    color: `${store.theme === colorThemes.lightTheme ? "" : "#fff"}`,
+  };
 
   return (
     <div
@@ -132,16 +180,20 @@ const OperationsComponent: React.FC = () => {
       <Suspense>
         <Modal
           open={newTaskModal}
-          title="Add Task"
+          title={modalTitle("Add Task")}
           onOk={() => submitTask()}
           onCancel={() => setNewTaskModal(false)}
           okText="Add Task"
+          okButtonProps={btnStyling()}
+          cancelButtonProps={btnStyling("grey")}
+          styles={{ ...modalStyle }}
         >
-          <label>Summary</label>
+          <label style={{ ...taskLabelStyle }}>Summary</label>
           <Input
             className="mb-[10px]"
             placeholder="Ex. Add APIs"
             value={taskContent.summary}
+            style={{ ...inputStyle }}
             onChange={(e: any) =>
               setTaskContent({
                 ...taskContent,
@@ -150,11 +202,12 @@ const OperationsComponent: React.FC = () => {
             }
           />
 
-          <label>Description</label>
+          <label style={{ ...taskLabelStyle }}>Description</label>
           <Textarea
             className="mb-[10px]"
             placeholder="Ex. Connect backend API to display user list"
             value={taskContent.description}
+            style={{ ...inputStyle }}
             onChange={(e: any) =>
               setTaskContent({
                 ...taskContent,
@@ -166,7 +219,7 @@ const OperationsComponent: React.FC = () => {
 
           <div className="flex flex-row justify-between">
             <div className="flex flex-col w-[48%]">
-              <label>Priority</label>
+              <label style={{ ...taskLabelStyle }}>Priority</label>
               <Select
                 className="mb-[10px]"
                 placeholder="Ex. Add new styling"
@@ -192,7 +245,7 @@ const OperationsComponent: React.FC = () => {
             </div>
 
             <div className="flex flex-col w-[48%]">
-              <label>Due Date</label>
+              <label style={{ ...taskLabelStyle }}>Due Date</label>
               <DatePickerAntd
                 placeholder="Select Date"
                 value={taskContent.date}
@@ -209,44 +262,52 @@ const OperationsComponent: React.FC = () => {
         </Modal>
         <Modal
           open={columnsModal}
-          title="Add Column"
+          title={modalTitle("Add Column")}
+          cancelButtonProps={btnStyling("grey")}
+          okButtonProps={btnStyling()}
           onOk={() => submitColumn()}
           onCancel={() => setColumnsModal(false)}
           okText="Add Column"
+          styles={{ ...modalStyle }}
         >
-          <p>Column name</p>
           <Input
             placeholder="Ex. In Progress"
             value={column}
             onChange={(e: any) => setColum(e.target.value)}
+            style={{ ...inputStyle }}
           />
         </Modal>
         <Modal
           open={removeProject}
           onOk={() => deleteProject()}
           onCancel={() => setRemoveProject(false)}
-          okButtonProps={{ style: { backgroundColor: "red" } }}
+          okButtonProps={{
+            style: { backgroundColor: "red" },
+            backgroundColor: `${
+              store.theme === colorThemes.lightTheme ? "" : "transparent"
+            }`,
+          }}
+          cancelButtonProps={btnStyling("grey")}
           okText="Delete"
-          title="Would you like to delete this project?"
+          title={modalTitle("Would you like to delete this project?")}
+          styles={{ ...modalStyle }}
         />
 
         <Modal
           open={modalAddProject}
-          title="Add Project"
+          title={modalTitle("Add Project")}
           okText="Add Project"
+          okButtonProps={btnStyling()}
+          cancelButtonProps={btnStyling("grey")}
           onCancel={() => setModalAddProject(false)}
           onOk={() => addProject()}
-          // styles={{
-          //   content: { backgroundColor: getTheme(store.theme) },
-          //   header: {
-          //     backgroundColor: getTheme(store.theme),
-          //   },
-          // }}
+          styles={{ ...modalStyle }}
         >
           <Input
             value={store.projectTitle}
             onChange={(e: any) => store.setProjectTitle(e.target.value)}
             placeholder="Ex. React Frontend Project"
+            style={{ ...inputStyle }}
             allowClear
           />
         </Modal>

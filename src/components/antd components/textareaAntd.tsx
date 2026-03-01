@@ -10,6 +10,7 @@ const TextareaAntd = (props: any) => {
     allowClear = false,
     className = "",
     autoSize = false || {},
+    style = {},
   } = props || {};
 
   const inputProps = {
@@ -19,6 +20,7 @@ const TextareaAntd = (props: any) => {
     allowClear,
     className,
     autoSize,
+    style,
   };
 
   return <TextArea {...inputProps} />;

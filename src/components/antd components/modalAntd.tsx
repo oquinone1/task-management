@@ -14,6 +14,8 @@ const ModalAntd = (props: any) => {
     footer,
     closable = true,
     maskClosable = true,
+    className = "",
+    styles = "",
   } = props || {};
 
   const inputProps = {
@@ -29,6 +31,8 @@ const ModalAntd = (props: any) => {
     footer,
     closable,
     maskClosable,
+    className,
+    styles,
   };
 
   return <Modal {...inputProps} />;
