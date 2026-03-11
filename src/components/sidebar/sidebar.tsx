@@ -16,6 +16,7 @@ const SidebarComponent: React.FC = () => {
           theme={store.theme}
           items={store.menuItems}
           className={`h-full py-[20px]`}
+          style={{ borderRadius: "10px" }}
           onClick={(e: any) => {
             getProjectData(e.key);
           }}

@@ -13,7 +13,12 @@ function App() {
 
   return (
     <Layout className="h-screen">
-      <Sider trigger={null} collapsible collapsed={store.sidebarCollapse}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={store.sidebarCollapse}
+        style={{ borderRadius: "10px", margin: "10px 0 10px 15px" }}
+      >
         <SidebarComponent />
       </Sider>
       <Layout>
